@@ -1,11 +1,18 @@
 #-*- coding: utf-8 -*-
 
+import sys
+import traceback
+
 
 class Error(Exception):
 
     """Generic exception"""
 
-    pass
+    def __init__(self, *args, **kwargs):
+        super(Error, self).__init__(*args, **kwargs)
+
+        if sys.stdout.isatty():
+            traceback.print_exc()
 
 
 class ProtocolError(Error):

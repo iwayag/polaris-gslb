@@ -1,0 +1,7 @@
+recursive-include polaris_common *.py
+recursive-include polaris_pdns *.py
+recursive-include polaris_health *.py
+recursive-include tests *.py
+include *.txt
+graft bin
+graft etc

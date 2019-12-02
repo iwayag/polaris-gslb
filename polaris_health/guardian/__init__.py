@@ -104,17 +104,17 @@ class Guardian:
         if not os.path.isfile(lb_config_file):
             log_msg = '{} does not exist'.format(lb_config_file)
             LOG.error(log_msg)
-            raise Error(log_msg)
+            raise Error(log_msg, Loader=yaml.FullLoader)
         else:
             with open(lb_config_file) as fp:
-                config.LB = yaml.load(fp)
+                config.LB = yaml.load(fp, Loader=yaml.FullLoader)
 
         ### optionally load TOPOLOGY_MAP configuration ###
         topology_config_file = os.path.join(
             config.BASE['INSTALL_PREFIX'], 'etc', 'polaris-topology.yaml')
         if os.path.isfile(topology_config_file):
             with open(topology_config_file) as fp:
-                topology_config = yaml.load(fp)
+                topology_config = yaml.load(fp, Loader=yaml.FullLoader)
 
             if topology_config:
                 config.TOPOLOGY_MAP = topology.config_to_map(topology_config)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import ipaddress
 import logging
 import socket
 import time
@@ -28,13 +29,17 @@ class TCPSocket:
             automatically decrease after every I/O operation by the amount 
             of time it took to complete it.
         """    
-        self.ip = ip
+
+        self.ip = ipaddress.ip_address(ip)
         self.port = port
         self.timeout = timeout
         self.auto_timeout = auto_timeout
 
         # create socket
-        self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        if self.ip.version == 4:
+            self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        else:
+            self._sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
         
         self.settimeout(self.timeout)
 
@@ -42,7 +47,7 @@ class TCPSocket:
         """Connect self._sock to self.ip:self.port"""    
         start_time = time.monotonic()
         try:
-            self._sock.connect((self.ip, self.port))
+            self._sock.connect((str(self.ip), self.port))
         except OSError as e:
             self._sock.close()
             raise ProtocolError('{} {} during socket.connect()'
