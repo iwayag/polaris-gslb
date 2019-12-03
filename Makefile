@@ -55,7 +55,7 @@ install: dist/$(PYTHON_MODULE)-$(VERSION).tar.gz
 	set -e; POLARIS_INSTALL_PREFIX=$(INST_ROOT) PATH=$(PATH) PYTHONPATH="" PYTHONUSERBASE=$(PYTHONUSERBASE) $(PIP) install $(PIP_OPTS) \
 		dist/$(PYTHON_MODULE)-${VERSION}.tar.gz || (echo "$(PIP) install dist/$(PYTHON_MODULE)-$(VERSION).tar.gz failed"; exit 1)
 	rm -f $(INST_ROOT)/etc/*.yaml $(INST_ROOT)/etc/*.conf
-        [ -e /tmp/polaris.default.backup ] && cp /tmp/polaris.default.backup /etc/default/polaris
+	[ -e /tmp/polaris.default.backup ] && cp /tmp/polaris.default.backup /etc/default/polaris
 
 clean:
 	find . -type f -name "*.py[co]" -delete
