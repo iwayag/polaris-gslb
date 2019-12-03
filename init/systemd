@@ -1,0 +1,19 @@
+[Unit]
+Description=@@NAME@@ - Health Service
+After=syslog.target
+
+[Service]
+Type=simple
+Environment=POLARIS_INSTALL_PREFIX=@@PKG_ROOT@@
+Environment=PYTHONPATH=@@PKG_ROOT@@/lib/python@@PYTHON_VERSION_MAIN@@/site-packages
+ExecStart=@@PKG_ROOT@@/bin/polaris-health-control start-debug
+PIDFile=@@PKG_ROOT@@/run/polaris-health.pid
+RuntimeDirectory=@@PKG@@
+RuntimeDirectoryMode=755
+Restart=always
+RestartSec=5
+KillSignal=SIGQUIT
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

@@ -256,7 +256,7 @@ class Polaris(RemoteBackend):
             else:
                 num_records_return = pool['max_addrs_returned']
 
-	    for r in ip6[:num_records_return]:
+            for r in ip6[:num_records_return]:
                 self.add_record(**r)
 
     def _soa_response(self, params, qname):

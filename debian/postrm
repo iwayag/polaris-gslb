@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$1" = "purge" ]; then
+    rm -rf /etc/default/@@PKG@@ @@PKG_ROOT@@/run
+fi
+
+[ ! -f @@INIT_SHARE_SCRIPT@@ ] || @@INIT_SHARE_SCRIPT@@ postrm

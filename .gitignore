@@ -7,4 +7,6 @@ dist
 *.swo
 .DS_Store
 .cache
-
+*.deb
+install/
+get-pip.py
